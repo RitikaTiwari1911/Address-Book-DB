@@ -1,1 +1,8 @@
 Welcome to the Address Book!
+
+#Creating a database
+mysql> CREATE database Address_Book_Service;
+Query OK, 1 row affected (0.38 sec)
+
+mysql> use Address_Book_Service;
+Database changed
