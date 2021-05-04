@@ -98,5 +98,16 @@ mysql> SELECT COUNT(City) FROM address_book_table;
 +-------------+
 1 row in set (0.00 sec)
 
+#Ability to retrieve entries in alphabetical order by First Name
+mysql> SELECT * FROM address_Book_table WHERE State= 'UP' ORDER BY FirstName ASC;
++-----------+----------+-------------------+-----------+-------+--------+-------------+-----------------+
+| FirstName | LastName | Address           | City      | State | Zip    | PhoneNumber | EmailId         |
++-----------+----------+-------------------+-----------+-------+--------+-------------+-----------------+
+| Anju      | Sinha    | 445H, ABCD Colony | Kanpur    | UP    | 963855 |   879456213 | anju@gmail.com  |
+| Rahul     | Kumar    | 45A, XYZ Colony   | Lucknow   | UP    | 879465 |  2137984655 | rahul@gmail.com |
+| Tanya     | Tiwari   | 453P, New Market  | Allahabad | UP    | 878945 |  2137456655 | tanya@gmail.com |
++-----------+----------+-------------------+-----------+-------+--------+-------------+-----------------+
+3 rows in set (0.02 sec)
+
 
 
