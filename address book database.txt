@@ -79,3 +79,13 @@ mysql> select * from address_book_table;
 | Anju      | Sinha    | 445H, ABCD Colony | Kanpur    | UP    | 963855 |  8794562513 | anju@gmail.com  |
 +-----------+----------+-------------------+-----------+-------+--------+-------------+-----------------+
 3 rows in set (0.00 sec)
+
+#Ability to retrieve a person belonging to a city
+mysql> SELECT * FROM address_book_table WHERE City='Lucknow';
++-----------+----------+-----------------+---------+-------+--------+-------------+-----------------+
+| FirstName | LastName | Address         | City    | State | Zip    | PhoneNumber | EmailId         |
++-----------+----------+-----------------+---------+-------+--------+-------------+-----------------+
+| Rahul     | Kumar    | 45A, XYZ Colony | Lucknow | UP    | 879465 |  2137984655 | rahul@gmail.com |
++-----------+----------+-----------------+---------+-------+--------+-------------+-----------------+
+1 row in set (0.00 sec)
+
