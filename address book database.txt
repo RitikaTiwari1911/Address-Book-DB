@@ -36,3 +36,31 @@ mysql> INSERT INTO address_book_table VALUES('Rahul', 'Kumar', '45A, XYZ Colony'
 					    ('Anju', 'Sinha', '445H, ABCD Colony','Kanpur','UP', 963855, 879456213, 'anju@gmail.com'),
 					    ('Sanya', 'Singh', '21A, ABC Colony','Kolkata','West Bengal', 123456, 2134568795, 'sanya@gmail.com');
 Query OK, 1 row affected (0.59 sec)
+
+mysql> select * from address_book_table;
++-----------+----------+-------------------+-----------+-------------+--------+-------------+-----------------+
+| FirstName | LastName | Address           | City      | State       | Zip    | PhoneNumber | EmailId         |
++-----------+----------+-------------------+-----------+-------------+--------+-------------+-----------------+
+| Rahul     | Kumar    | 45A, XYZ Colony   | Lucknow   | UP          | 879465 |  2137984655 | rahul@gmail.com |
+| Tanya     | Tiwari   | 453P, New Market  | Allahabad | UP          | 878945 |  2137456655 | tanya@gmail.com |
+| Anju      | Sinha    | 445H, ABCD Colony | Kanpur    | UP          | 963855 |   879456213 | anju@gmail.com  |
+| Sanya     | Singh    | 21A, ABC Colony   | Kolkata   | West Bengal | 123456 |  2134568795 | sanya@gmail.com |
++-----------+----------+-------------------+-----------+-------------+--------+-------------+-----------------+
+4 rows in set (0.10 sec)
+
+
+#Ability to edit existing contact from the table
+
+mysql> UPDATE address_book_table set Address='12 lane, MG Road' WHERE FirstName='Sanya';
+Query OK, 1 row affected (0.13 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+mysql> select * from address_book_table;
++-----------+----------+-------------------+-----------+-------------+--------+-------------+-----------------+
+| FirstName | LastName | Address           | City      | State       | Zip    | PhoneNumber | EmailId         |
++-----------+----------+-------------------+-----------+-------------+--------+-------------+-----------------+
+| Rahul     | Kumar    | 45A, XYZ Colony   | Lucknow   | UP          | 879465 |  2137984655 | rahul@gmail.com |
+| Tanya     | Tiwari   | 453P, New Market  | Allahabad | UP          | 878945 |  2137456655 | tanya@gmail.com |
+| Anju      | Sinha    | 445H, ABCD Colony | Kanpur    | UP          | 963855 |   879456213 | anju@gmail.com  |
+| Sanya     | Singh    | 12 lane, MG Road  | Kolkata   | West Bengal | 123456 |  2134568795 | sanya@gmail.com |
++-----------+----------+-------------------+-----------+-------------+--------+-------------+-----------------+
+4 rows in set (0.10 sec)
