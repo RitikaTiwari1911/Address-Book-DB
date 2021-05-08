@@ -1,4 +1,5 @@
 Welcome to the Address Book!
+==========================================================================================================================================================
 
 #Creating a database
 mysql> CREATE database Address_Book_Service;
@@ -6,10 +7,8 @@ Query OK, 1 row affected (0.38 sec)
 
 mysql> use Address_Book_Service;
 Database changed
-
+============================================================================================================================================================
 mysql> #Ability to create attributes
-mysql> create table Address_Book_Table (FirstName VARCHAR(150),
-    -> use Address_Book_Service;^C
 mysql> create table Address_Book_Table (FirstName VARCHAR(150) NOT NULL, LastName VARCHAR(150) NOT NULL, 
        Address VARCHAR(100) NOT NULL, City VARCHAR(30) NOT NULL,State VARCHAR(30) NOT NULL, 
        Zip INT(6) NOT NULL, PhoneNumber INT(12) NOT NULL, EmailId VARCHAR(50) NOT NULL);
@@ -29,8 +28,10 @@ mysql> DESCRIBE Address_Book_Table;
 | EmailId     | varchar(50)  | NO   |     | NULL    |       |
 +-------------+--------------+------+-----+---------+-------+
 8 rows in set (0.10 sec)
+==============================================================================================================================================================
 
 #Ability to insert contacts in the address book
+
 mysql> INSERT INTO address_book_table VALUES('Rahul', 'Kumar', '45A, XYZ Colony','Lucknow','UP', 879465, 2137984655, 'rahul@gmail.com'),
 					    ('Tanya', 'Tiwari', '453P, New Market','Allahabad','UP', 878945, 2137456655, 'tanya@gmail.com'),
 					    ('Anju', 'Sinha', '445H, ABCD Colony','Kanpur','UP', 963855, 879456213, 'anju@gmail.com'),
@@ -47,7 +48,7 @@ mysql> select * from address_book_table;
 | Sanya     | Singh    | 21A, ABC Colony   | Kolkata   | West Bengal | 123456 |  2134568795 | sanya@gmail.com |
 +-----------+----------+-------------------+-----------+-------------+--------+-------------+-----------------+
 4 rows in set (0.10 sec)
-
+==============================================================================================================================================================
 
 #Ability to edit existing contact from the table
 
@@ -64,6 +65,7 @@ mysql> select * from address_book_table;
 | Sanya     | Singh    | 12 lane, MG Road  | Kolkata   | West Bengal | 123456 |  2134568795 | sanya@gmail.com |
 +-----------+----------+-------------------+-----------+-------------+--------+-------------+-----------------+
 4 rows in set (0.10 sec)
+================================================================================================================================================================
 
 #Delete a person using person's first name
 
@@ -80,6 +82,7 @@ mysql> select * from address_book_table;
 +-----------+----------+-------------------+-----------+-------+--------+-------------+-----------------+
 3 rows in set (0.00 sec)
 
+=========================================================================================================
 #Ability to retrieve a person belonging to a city
 mysql> SELECT * FROM address_book_table WHERE City='Lucknow';
 +-----------+----------+-----------------+---------+-------+--------+-------------+-----------------+
@@ -89,6 +92,7 @@ mysql> SELECT * FROM address_book_table WHERE City='Lucknow';
 +-----------+----------+-----------------+---------+-------+--------+-------------+-----------------+
 1 row in set (0.00 sec)
 
+================================================================================================================================================================
 #Ability to get the size of the address book by the city
 mysql> SELECT COUNT(City) FROM address_book_table;
 +-------------+
@@ -97,6 +101,7 @@ mysql> SELECT COUNT(City) FROM address_book_table;
 |           3 |
 +-------------+
 1 row in set (0.00 sec)
+=================================================================================================================================================================
 
 #Ability to retrieve entries in alphabetical order by First Name
 mysql> SELECT * FROM address_Book_table WHERE State= 'UP' ORDER BY FirstName ASC;
@@ -108,6 +113,95 @@ mysql> SELECT * FROM address_Book_table WHERE State= 'UP' ORDER BY FirstName ASC
 | Tanya     | Tiwari   | 453P, New Market  | Allahabad | UP    | 878945 |  2137456655 | tanya@gmail.com |
 +-----------+----------+-------------------+-----------+-------+--------+-------------+-----------------+
 3 rows in set (0.02 sec)
+==================================================================================================================================================================
+
+#Ability to identify each address Book with name and type
+
+mysql> ALTER TABLE address_book_table ADD Type INT NOT NULL AUTO_INCREMENT PRIMARY KEY AFTER EmailId;
+Query OK, 0 rows affected (5.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from address_book_table;
++-----------+----------+-------------------+-----------+-------+--------+-------------+-----------------+------+
+| FirstName | LastName | Address           | City      | State | Zip    | PhoneNumber | EmailId         | Type |
++-----------+----------+-------------------+-----------+-------+--------+-------------+-----------------+------+
+| Rahul     | Kumar    | 45A, XYZ Colony   | Lucknow   | UP    | 879465 |  2137984655 | rahul@gmail.com |    1 |
+| Tanya     | Tiwari   | 453P, New Market  | Allahabad | UP    | 878945 |  2137456655 | tanya@gmail.com |    2 |
+| Anju      | Sinha    | 445H, ABCD Colony | Kanpur    | UP    | 963855 |   879456213 | anju@gmail.com  |    3 |
++-----------+----------+-------------------+-----------+-------+--------+-------------+-----------------+------+
+3 rows in set (0.00 sec)
+
+mysql> desc address_book_table;
++-------------+--------------+------+-----+---------+----------------+
+| Field       | Type         | Null | Key | Default | Extra          |
++-------------+--------------+------+-----+---------+----------------+
+| FirstName   | varchar(150) | NO   |     | NULL    |                |
+| LastName    | varchar(150) | NO   |     | NULL    |                |
+| Address     | varchar(100) | NO   |     | NULL    |                |
+| City        | varchar(30)  | NO   |     | NULL    |                |
+| State       | varchar(30)  | NO   |     | NULL    |                |
+| Zip         | int          | NO   |     | NULL    |                |
+| PhoneNumber | int          | NO   |     | NULL    |                |
+| EmailId     | varchar(50)  | NO   |     | NULL    |                |
+| Type        | int          | NO   | PRI | NULL    | auto_increment |
++-------------+--------------+------+-----+---------+----------------+
+9 rows in set (0.88 sec)
+
+mysql> CREATE TABLE address_book_type(id INT NOT NULL PRIMARY KEY, Type VARCHAR(25) NOT NULL);
+Query OK, 0 rows affected (0.82 sec)
+
+mysql> desc address_book_type;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | int         | NO   | PRI | NULL    |       |
+| Type  | varchar(25) | NO   |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.59 sec)
+
+mysql> INSERT INTO address_book_type(id,type) VALUES (1,'Friend');
+Query OK, 1 row affected (0.39 sec)
+
+mysql> INSERT INTO address_book_type(id,type) VALUES (2,'Family'),(3,'Profession');
+Query OK, 2 rows affected (0.17 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE address_book_type ADD FOREIGN KEY(id) REFERENCES address_book_table(Type);
+Query OK, 0 rows affected (6.16 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from address_book_table inner join address_book_type on address_book_table.type = address_book_type.id;
+Empty set (0.06 sec)
+
+mysql> select * from address_book_table inner join address_book_type on address_book_table.type = address_book_type.id;
++-----------+----------+-------------------+-----------+-------+--------+-------------+-----------------+------+----+------------+
+| FirstName | LastName | Address           | City      | State | Zip    | PhoneNumber | EmailId         | Type | id | Type       |
++-----------+----------+-------------------+-----------+-------+--------+-------------+-----------------+------+----+------------+
+| Rahul     | Kumar    | 45A, XYZ Colony   | Lucknow   | UP    | 879465 |  2137984655 | rahul@gmail.com |    1 |  1 | Friend     |
+| Tanya     | Tiwari   | 453P, New Market  | Allahabad | UP    | 878945 |  2137456655 | tanya@gmail.com |    2 |  2 | Family     |
+| Anju      | Sinha    | 445H, ABCD Colony | Kanpur    | UP    | 963855 |  8794562153 | anju@gmail.com  |    3 |  3 | Profession |
++-----------+----------+-------------------+-----------+-------+--------+-------------+-----------------+------+----+------------+
+3 rows in set (0.03 sec)
+
+====================================================================================================================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
