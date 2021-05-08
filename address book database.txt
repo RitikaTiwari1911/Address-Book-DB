@@ -185,6 +185,31 @@ mysql> select * from address_book_table inner join address_book_type on address_
 
 ====================================================================================================================================================================
 
+#Ability to get number of contact persons i.e. count by type
+
+mysql> select * from address_book_type;
++----+---------------+
+| id | Relation_Type |
++----+---------------+
+|  1 | Friend        |
+|  2 | Family        |
+|  3 | Profession    |
++----+---------------+
+3 rows in set (0.26 sec)
+
+mysql> select Relation_Type, count(type) from address_book_table inner join address_book_type on address_book_table.type = address_book_type.id 
+-> group by address_book_table.type;
++---------------+-------------+
+| Relation_Type | count(type) |
++---------------+-------------+
+| Friend        |           1 |
+| Family        |           1 |
+| Profession    |           1 |
++---------------+-------------+
+3 rows in set (0.08 sec)
+
+=====================================================================================================================================================================
+
 
 
 
